@@ -1,0 +1,320 @@
+---
+title: "Plan de revue de données"
+author : "AEROPERC"
+date : "Aérosols thérapeutiques et percussion intrapulmonaire au cours de la fibrose pulmonaire idopathique"
+output:
+  word_document:
+    # toc: true
+    reference_docx: template.docx
+---
+
+Nom du coordonnateur : Pr Laurent PLANTIER\
+Nom du rédacteur : Evan JOUAN & Kéran CARVALHAIS\
+Date et version du document : 11/06/2025 - V1\
+Date de la réunion de revue de données :\
+\newpage
+
+L'objectif de ce plan de revue de données est de faire un état des lieux de la base de données. Cet état des lieux permettra, lors de la revue de données, de statuer sur les dernières incohérences et déviations au protocole et ainsi de définir, si besoin, les différentes populations à analyser.
+
+```{r, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+  source("main.R")
+```
+
+# I - GÉNÉRALITÉS
+
+-   **Nombre d'eCRFs créés/Nombre de patients inclus/Nombre de patients non inclus**
+
+```{r, echo=FALSE}
+suppressWarnings({
+  kable(General)
+})
+```
+
+&nbsp;
+
+-   **Identification des doublons**
+
+```{r, echo=FALSE}
+suppressWarnings({
+  if(is.null(Doublon)){
+    cat("Aucun patient en doublon.")
+  } else{kable(Doublon)}
+})
+```
+
+&nbsp;
+
+-   **Patients non randomisés et la raison de non randomisation**
+
+```{r, echo=FALSE}
+suppressWarnings({
+kable(NonRandomisesJustification[c("SUBJID", "VSDTCRANDO", "IDCONSENT", "IDCONSENTDTC", "IDLOST", "IDLOSTP", "IDLOSTPP", "IDLOSTPDTC", "IDDEATH", "IDDEATHDTC", "IDDMED", "IDDMEDP", "IDDMEDDTC"),])
+})
+```
+
+&nbsp;
+
+-   **Patients non randomisés et sans raison de non randomisation**
+
+```{r, echo=FALSE}
+suppressWarnings({
+  if(is.null(NonRandomisesNonJustification)){
+    cat("Aucun patient non randomises sans raison de non randomisation.")
+  } else{kable(NonRandomisesNonJustification)}
+})
+```
+
+&nbsp;
+
+-   **Respect du groupe de randomisation**
+
+```{r, echo=FALSE}
+suppressWarnings({
+  kable(randRespect)
+})
+```
+
+&nbsp;
+
+-   **Non respect du dosage de la VPIP**
+
+```{r, echo=FALSE}
+suppressWarnings({
+  kable(admin_VPIP_NonRespect)
+})
+```
+
+&nbsp;
+
+# II - INTERRUPTION DÉFINITIVE DU RECUEIL DES DONNÉES
+
+```{r, echo=FALSE}
+suppressWarnings({
+  if(is.null(IDRDaOUI)){
+    cat("Aucune interruption définitive de recueil des données n'est à oui.")
+  }else{kable(IDRDaOUI)}
+})
+```
+
+&nbsp;
+
+# III - RESPECT DES CRITÈRES D'INCLUSION ET DE NON INCLUSION
+
+## III.1 - CRITÈRES D'INCLUSION
+
+```{r, echo=FALSE}
+suppressWarnings({
+  if(is.null(CIaNON)){
+    cat("Tous les critères d'inclusion sont respectés.")
+  } else{kable(CIaNON)}
+})
+```
+
+&nbsp;
+
+## III.2 - CRITÈRES DE NON INCLUSION
+
+```{r, echo=FALSE}
+suppressWarnings({
+  if(is.null(CNIaOUI)){
+    cat("Tous les critères de non inclusion sont respectés.")
+  } else{kable(CNIaOUI)}
+})
+```
+
+&nbsp;
+
+## III.3 - CRITÈRES D'EXCLUSION
+
+```{r, echo=FALSE}
+suppressWarnings({
+  if(is.null(CEaOUI)){
+    cat("Aucun critères d'exclusion n'est à oui.")
+  } else{kable(CEaOUI)}
+})
+```
+
+&nbsp;
+
+## III.4 - CRITÈRES D'INTERRUPTION
+
+```{r, echo=FALSE}
+suppressWarnings({
+  if(is.null(CINTaOUI)){
+    cat("Aucun critères d'interruption n'est à oui.")
+  } else{kable(CINTaOUI)}
+})
+```
+
+&nbsp;
+
+# IV - DONNÉES PORTANT SUR LA BASE DE DONNÉES
+
+Les patients 0101 et 0109, sont pris en compte seulement aux visites V1, V2 et V3 (n'ayant pas été randomisés).\
+Dans les parties **Données manquantes**, toutes les données n'apparaissant pas sont des données complètes.
+
+## IV.1 - VISITE V1 (n = 9)
+
+-   **Données manquantes**
+
+```{r, echo=FALSE}
+suppressWarnings({
+  if(is.null(V1manquant_NK_ND_NA)){
+    cat("Aucune données manquantes à V1.")
+  }else
+  kable(V1manquant_NK_ND_NA)
+})
+```
+
+&nbsp;
+
+-   **Données minimum & maximum**
+
+```{r, echo=FALSE}
+suppressWarnings({
+  if(is.null(V1MinMax)){
+    cat("Aucune données minimum & maximum à V1.")
+  }else
+  kable(V1MinMax)
+})
+```
+
+&nbsp;
+
+## IV.2 - VISITE V2 (n = 9)
+
+-   **Données manquantes**
+
+```{r, echo=FALSE}
+suppressWarnings({
+  if(is.null(V2manquant_NK_ND_NA)){
+    cat("Aucune données manquantes à V2.")
+  }else
+  kable(V2manquant_NK_ND_NA)
+})
+```
+
+&nbsp;
+
+-   **Données minimum & maximum**
+
+```{r, echo=FALSE}
+suppressWarnings({
+  if(is.null(V2MinMax)){
+    cat("Aucune données minimum & maximum à V2.")
+  }else
+  kable(V2MinMax)
+})
+```
+
+&nbsp;
+
+## IV.3 - VISITE V3 (n = 9)
+
+-   **Données manquantes**
+
+```{r, echo=FALSE}
+suppressWarnings({
+  if(is.null(V3manquant_NK_ND_NA)){
+    cat("Aucune données manquantes à V3.")
+  }else
+  kable(V3manquant_NK_ND_NA)
+})
+```
+
+&nbsp;
+
+-   **Données minimum & maximum**
+
+```{r, echo=FALSE}
+suppressWarnings({
+  if(is.null(V3MinMax)){
+    cat("Aucune données minimum & maximum à V3.")
+  }else
+  kable(V3MinMax)
+})
+```
+
+&nbsp;
+
+## IV.4 - VISITE V4 (n = 7)
+
+-   **Données manquantes**
+
+```{r, echo=FALSE}
+suppressWarnings({
+  if(is.null(V4manquant_NK_ND_NA)){
+    cat("Aucune données manquantes à V4.")
+  }else
+  kable(V4manquant_NK_ND_NA)
+})
+```
+
+&nbsp;
+
+-   **Données minimum & maximum**
+
+```{r, echo=FALSE}
+suppressWarnings({
+  if(is.null(V4MinMax)){
+    cat("Aucune données minimum & maximum à V4.")
+  }else
+  kable(V4MinMax)
+})
+```
+
+&nbsp;
+
+## IV.5 - VISITE V5 (n = 7)
+
+-   **Données manquantes**
+
+```{r, echo=FALSE}
+suppressWarnings({
+  if(is.null(V5manquant_NK_ND_NA)){
+    cat("Aucune données manquantes à V5.")
+  }else
+  kable(V5manquant_NK_ND_NA)
+})
+```
+
+&nbsp;
+
+-   **Données minimum & maximum**
+
+```{r, echo=FALSE}
+suppressWarnings({
+  if(is.null(V5MinMax)){
+    cat("Aucune données minimum & maximum à V5.")
+  }else
+  kable(V5MinMax)
+})
+```
+
+&nbsp;
+
+## IV.6 - VISITE V6
+
+-   **Données manquantes**
+
+```{r, echo=FALSE}
+suppressWarnings({
+  if(is.null(V6manquant_NK_ND_NA)){
+    cat("Aucune données manquantes à V6.")
+  }else
+  kable(V6manquant_NK_ND_NA)
+})
+```
+
+&nbsp;
+
+-   **Données minimum & maximum**
+
+```{r, echo=FALSE}
+suppressWarnings({
+  if(is.null(V6MinMax)){
+    cat("Aucune données minimum & maximum à V6.")
+  }else
+  kable(V6MinMax)
+})
+```
